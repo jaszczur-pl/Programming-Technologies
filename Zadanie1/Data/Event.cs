@@ -8,6 +8,5 @@ namespace Zadanie1.Data
     {
         private CDState cdState;
         private Customer customer;
-
     }
 }
