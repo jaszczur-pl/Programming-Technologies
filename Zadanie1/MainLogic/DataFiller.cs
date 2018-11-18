@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Zadanie1.MainLogic
 {
-    class DataRepository
+    interface DataFiller
     {
-        private DataContext data;
+        void Fill(DataContext context);
     }
 }
