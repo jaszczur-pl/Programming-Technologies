@@ -6,7 +6,7 @@ using Zadanie1.Data;
 
 namespace Zadanie1.MainLogic
 {
-    class DataContext
+    public class DataContext
     {
         public List<Customer> customers;
         public Dictionary<int, CD> cds;

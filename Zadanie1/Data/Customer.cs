@@ -4,11 +4,13 @@ using System.Text;
 
 namespace Zadanie1.Data
 {
-    class Customer
+    public class Customer
     {
-        private string name;
-        private string surname;
-        private string emailAddress;
-        private int age;
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string emailAddress { get; set; }
+        public int age { get; set; }
+
+
     }
 }

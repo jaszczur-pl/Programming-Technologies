@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Zadanie1.Data
 {
-    class Event
+   public class Event
     {
-        private CDState cdState;
-        private Customer customer;
+        public CDState cdState { get; set; }
+        public Customer customer { get; set; }
     }
 }

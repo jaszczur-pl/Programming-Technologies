@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Zadanie1.Data
 {
-    class CDState
+    public class CDState
     {
-        private CD cd;
-        private string title;
-        private string group;
-        private DateTimeOffset dateOfPurchase;
+        public CD cd { get; set; }
+        public string title { get; set; }
+        public string group { get; set; }
+        public DateTimeOffset dateOfPurchase { get; set; }
     }
 }
