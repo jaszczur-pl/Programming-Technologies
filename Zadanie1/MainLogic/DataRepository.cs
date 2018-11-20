@@ -10,7 +10,7 @@ namespace Zadanie1.MainLogic
         private DataFiller filler;
 
         DataRepository(DataFiller filler) {
-            this.filler = DataFiller;
+            this.filler = filler;
         }
     }
 }
