@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Zadanie1.Data;
 
 namespace Zadanie1.MainLogic
 {
-    class ConstantFiller : DataFiller
+    public class ConstantFiller : DataFiller
     {
         public override void Fill(DataContext context)
         {
-            var customers = context.customers;
-            var cds = context.cds;
-            var events = context.events;
-            var cdStates = context.cdStates;
+            List<Customer> customers = context.customers;
+            Dictionary<int, CD> cds = context.cds;
+            ObservableCollection<Event> events = context.events;
+            List<CDState> cdStates = context.cdStates;
 
 
             Customer c1 = new Customer()
@@ -36,6 +37,7 @@ namespace Zadanie1.MainLogic
                 emailAddress = "milochk@onet.pl",
                 age = 24
             };
+
 
 
             CD cd1 = new CD() {
@@ -89,9 +91,9 @@ namespace Zadanie1.MainLogic
             customers.Add(c1);
             customers.Add(c2);
             customers.Add(c3);
-            cds.Add(1, cd1);
-            cds.Add(2, cd2);
-            cds.Add(3, cd3);
+            cds.Add(cd1.id, cd1);
+            cds.Add(cd2.id, cd2);
+            cds.Add(cd3.id, cd3);
             cdStates.Add(cdState1);
             cdStates.Add(cdState2);
             cdStates.Add(cdState3);

@@ -10,7 +10,5 @@ namespace Zadanie1.Data
         public string surname { get; set; }
         public string emailAddress { get; set; }
         public int age { get; set; }
-
-
     }
 }
