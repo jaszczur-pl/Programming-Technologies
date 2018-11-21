@@ -43,7 +43,7 @@ namespace Zadanie1.MainLogic
             };
             CD cd2 = new CD() {
                 id=2548,
-                title = "Bed",
+                title = "Bad",
                 group = "Michael Jackson",
             };
             CD cd3 = new CD() {

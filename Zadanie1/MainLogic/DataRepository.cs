@@ -24,7 +24,9 @@ namespace Zadanie1.MainLogic
         }
 
         public void AddCD(CD cd) {
-            data.cds.Add(cd.id, cd);
+            if (!data.cds.ContainsKey(cd.id)) {
+                data.cds.Add(cd.id, cd);
+            }
         }
 
         public void AddEvent(Event evt) {
