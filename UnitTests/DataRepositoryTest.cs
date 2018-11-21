@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1.Data;
 using Zadanie1.MainLogic;
+using System.Linq;
 
 namespace UnitTests
 {
@@ -193,6 +194,37 @@ namespace UnitTests
 
             //check if method returns null 
             Assert.AreEqual(null, dataRepository.GetCDState(outOfRangeIndex));
+        }
+
+        [TestMethod]
+        public void GetAllCustomersTest() {
+
+            //check if collections contents are matched
+            Assert.AreEqual(data.customers, dataRepository.GetAllCustomers());
+        }
+
+        [TestMethod]
+        public void GetAllCDsTest() {
+            IEnumerable<CD> listOfCDs = dataRepository.GetAllCDs();
+
+            //check if collections contents are matched
+            foreach (CD cd in listOfCDs) {
+                Assert.IsTrue(data.cds.Values.Contains(cd));
+            }
+        }
+
+        [TestMethod]
+        public void GetAllEventsTest() {
+
+            //check if collections contents are matched
+            Assert.AreEqual(data.events, dataRepository.GetAllEvents());
+        }
+
+        [TestMethod]
+        public void GetAllCDStatesTest() {
+
+            //check if collections contents are matched
+            Assert.AreEqual(data.cdStates, dataRepository.GetAllCDStates());
         }
     }
 }
