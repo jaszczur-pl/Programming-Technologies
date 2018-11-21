@@ -65,7 +65,7 @@ namespace Zadanie1.MainLogic
             }
         }
 
-        public CDState GetCDStates(int index) {
+        public CDState GetCDState(int index) {
             if (data.cdStates.Count > index) {
                 return data.cdStates[index];
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1.Data;
 using Zadanie1.MainLogic;
@@ -83,11 +84,115 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void AddEventTestt() {
-            int oldListsize = data.events.Count;
+        public void AddEventTest() {
+            int oldListSize = data.events.Count;
 
+            CD cd = new CD() {
+                id = 1234,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
 
+            CDState cdState = new CDState() {
+                cd = cd,
+                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
+            };
+
+            Customer customer = new Customer() {
+                name = "Kamil",
+                surname = "Filipczak",
+                emailAddress = "kf@gmail.com",
+                age = 51
+            };
+
+            Event evt = new Event() {
+                cdState = cdState,
+                customer = customer
+            };
+
+            dataRepository.AddEvent(evt);
+            int newListSize = data.events.Count;
+
+            //check if size of new and old collection is different
+            Assert.AreNotEqual(oldListSize, newListSize);
+
+            //check if collection contains added event
+            Assert.IsTrue(data.events.Contains(evt));
         }
 
+        [TestMethod]
+        public void AddCDStateTest() {
+            int oldListSize = data.cdStates.Count;
+
+            CD cd = new CD() {
+                id = 1234,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
+
+            CDState cdState = new CDState() {
+                cd = cd,
+                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
+            };
+
+            dataRepository.AddCDState(cdState);
+            int newListSize = data.cdStates.Count;
+
+            //check if size of new and old collection is different
+            Assert.AreNotEqual(oldListSize, newListSize);
+
+            //check if collection contains added event
+            Assert.IsTrue(data.cdStates.Contains(cdState));
+        }
+
+        [TestMethod]
+        public void GetCustomerTest() {
+            int randomIndex = new Random().Next(0, data.customers.Count - 1);
+            int outOfRangeIndex = data.customers.Count;
+
+            //check if method returns matched object for proper index
+            Assert.AreEqual(data.customers[randomIndex], dataRepository.GetCustomer(randomIndex));
+
+            //check if method returns null 
+            Assert.AreEqual(null, dataRepository.GetCustomer(outOfRangeIndex));
+        }
+
+        [TestMethod]
+        public void GetCDTest() {
+
+            Dictionary<int,CD>.KeyCollection keysList = data.cds.Keys;
+
+            //check if method returns matched object for proper index
+            foreach (int key in keysList) {
+                Assert.AreEqual(data.cds[key], dataRepository.GetCD(key));
+            }
+
+            //check if method returns null 
+            Assert.AreEqual(null, dataRepository.GetCD(-1));
+        }
+
+        [TestMethod]
+        public void GetEventTest() {
+            int randomIndex = new Random().Next(0, data.events.Count - 1);
+            int outOfRangeIndex = data.events.Count;
+
+            //check if method returns matched object for proper index
+            Assert.AreEqual(data.events[randomIndex], dataRepository.GetEvent(randomIndex));
+
+            //check if method returns null 
+            Assert.AreEqual(null, dataRepository.GetEvent(outOfRangeIndex));
+        }
+
+        [TestMethod]
+        public void GetCDStateTest() {
+            int randomIndex = new Random().Next(0, data.cdStates.Count - 1);
+            int outOfRangeIndex = data.cdStates.Count;
+
+            //check if method returns matched object for proper index
+            Assert.AreEqual(data.cdStates[randomIndex], dataRepository.GetCDState(randomIndex));
+
+            //check if method returns null 
+            Assert.AreEqual(null, dataRepository.GetCDState(outOfRangeIndex));
+        }
     }
 }

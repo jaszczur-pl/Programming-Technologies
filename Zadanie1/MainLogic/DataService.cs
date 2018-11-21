@@ -8,5 +8,9 @@ namespace Zadanie1.MainLogic
     {
         private DataRepository repository;
 
+        public DataService(DataRepository repository) {
+            this.repository = repository;
+        }
+
     }
 }

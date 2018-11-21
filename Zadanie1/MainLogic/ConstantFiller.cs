@@ -55,15 +55,15 @@ namespace Zadanie1.MainLogic
 
             CDState cdState1 = new CDState() {
                 cd = cd1,
-                dateOfPurchase = new DateTime(2014,10,21)
+                dateOfPurchase = new DateTimeOffset(new DateTime(2016, 06, 14))
             };
             CDState cdState2 = new CDState() {
                 cd = cd2,
-                dateOfPurchase = new DateTime(2015, 06, 13)
+                dateOfPurchase = new DateTimeOffset(new DateTime(2015, 06, 13))
             };
             CDState cdState3 = new CDState() {
                 cd = cd3,
-                dateOfPurchase = new DateTime(2018, 02, 11)
+                dateOfPurchase = new DateTimeOffset(new DateTime(2018, 02, 11))
             };
 
 
