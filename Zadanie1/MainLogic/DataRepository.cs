@@ -14,9 +14,7 @@ namespace Zadanie1.MainLogic
         public DataRepository(DataFiller filler, DataContext data) {
             this.filler = filler;
             this.data = data;
-        }
 
-        public void FillData() {
             filler.Fill(data);
         }
 

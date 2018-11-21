@@ -16,28 +16,24 @@ namespace Zadanie1.MainLogic
             List<CDState> cdStates = context.cdStates;
 
 
-            Customer c1 = new Customer()
-            {
+            Customer c1 = new Customer() {
                 name = "Kowalski",
                 surname = "Jan",
                 emailAddress = "kowaskij@gmail.com",
                 age = 30
             };
-            Customer c2 = new Customer()
-            {
+            Customer c2 = new Customer() {
                 name = "Nowak",
                 surname = "Katarzyna",
                 emailAddress = "nowakk@o2.pl",
                 age = 35
             };
-            Customer c3 = new Customer()
-            {
+            Customer c3 = new Customer() {
                 name = "Miłoch",
                 surname = "Krzysztof",
                 emailAddress = "milochk@onet.pl",
                 age = 24
             };
-
 
 
             CD cd1 = new CD() {
@@ -50,8 +46,7 @@ namespace Zadanie1.MainLogic
                 title = "Bed",
                 group = "Michael Jackson",
             };
-            CD cd3 = new CD()
-            {
+            CD cd3 = new CD() {
                 id = 3789,
                 title = "Undercover",
                 group = "The Rolling Stones",
@@ -62,13 +57,11 @@ namespace Zadanie1.MainLogic
                 cd = cd1,
                 dateOfPurchase = new DateTime(2014,10,21)
             };
-            CDState cdState2 = new CDState()
-            {
+            CDState cdState2 = new CDState() {
                 cd = cd2,
                 dateOfPurchase = new DateTime(2015, 06, 13)
             };
-            CDState cdState3 = new CDState()
-            {
+            CDState cdState3 = new CDState() {
                 cd = cd3,
                 dateOfPurchase = new DateTime(2018, 02, 11)
             };
