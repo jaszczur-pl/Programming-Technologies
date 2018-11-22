@@ -21,6 +21,8 @@ namespace UnitTests
             dataRepository = new DataRepository(filler, data);
         }
 
+        //'Add' methods tests
+
         [TestMethod]
         public void AddCustomerTest() {
             int oldListSize = data.customers.Count;
@@ -146,6 +148,8 @@ namespace UnitTests
             Assert.IsTrue(data.cdStates.Contains(cdState));
         }
 
+        //'Get' methods tests
+
         [TestMethod]
         public void GetCustomerTest() {
             int randomIndex = new Random().Next(0, data.customers.Count - 1);
@@ -196,6 +200,8 @@ namespace UnitTests
             Assert.AreEqual(null, dataRepository.GetCDState(outOfRangeIndex));
         }
 
+        //'GetAll' methods tests
+
         [TestMethod]
         public void GetAllCustomersTest() {
 
@@ -225,6 +231,224 @@ namespace UnitTests
 
             //check if collections contents are matched
             Assert.AreEqual(data.cdStates, dataRepository.GetAllCDStates());
+        }
+
+        //'Update' methods tests
+
+        [TestMethod]
+        public void UpdateCustomerPositiveTest() {
+
+            Customer updatedCustomer = new Customer() {
+                name = "Kamil",
+                surname = "Filipczak",
+                emailAddress = "kf@gmail.com",
+                age = 51
+            };
+
+            int customersCounter = data.customers.Count;
+            int randomIndex = new Random().Next(0, customersCounter - 1);
+
+            dataRepository.UpdateCustomer(randomIndex, updatedCustomer);
+
+            //check if number of customers is not changed
+            Assert.AreEqual(customersCounter, data.customers.Count);
+
+            //check if properties are the same
+            Assert.AreEqual(updatedCustomer.name, data.customers[randomIndex].name);
+            Assert.AreEqual(updatedCustomer.surname, data.customers[randomIndex].surname);
+            Assert.AreEqual(updatedCustomer.emailAddress, data.customers[randomIndex].emailAddress);
+            Assert.AreEqual(updatedCustomer.age, data.customers[randomIndex].age);
+        }
+
+        [TestMethod]
+        public void UpdateCustomerNegativeTest() {
+
+            //clear customers list
+            data.customers.Clear();
+
+            Customer updatedCustomer = new Customer() {
+                name = "Kamil",
+                surname = "Filipczak",
+                emailAddress = "kf@gmail.com",
+                age = 51
+            };
+
+            int index = 0;
+
+            //try to update empty list (index is out of range)
+            dataRepository.UpdateCustomer(index, updatedCustomer);
+
+            //check if list is still empty
+            Assert.AreEqual(0, data.customers.Count);
+        }
+
+        [TestMethod]
+        public void UpdateCDPositiveTest() {
+
+            CD cd = new CD() {
+                id = 1526,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
+
+            int oldDictSize = data.cds.Count;
+
+            dataRepository.UpdateCD(cd.id, cd);
+
+            //check if number of cds is not changed
+            Assert.AreEqual(oldDictSize, data.cds.Count);
+
+            //check if properties are the same
+            Assert.AreEqual(cd.id, data.cds[cd.id].id);
+            Assert.AreEqual(cd.title, data.cds[cd.id].title);
+            Assert.AreEqual(cd.group, data.cds[cd.id].group);
+        }
+
+        [TestMethod]
+        public void UpdateCDNegativeTest() {
+
+            //clear dictionary
+            data.cds.Clear();
+
+            CD cd = new CD() {
+                id = 1526,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
+
+            //try to update empty dictionary
+            dataRepository.UpdateCD(cd.id, cd);
+
+            //check if dictionary is still empty
+            Assert.AreEqual(0, data.cds.Count);
+        }
+
+        [TestMethod]
+        public void UpdateEventPositiveTest() {
+
+            int oldCollectionSize = data.events.Count;
+            int randomIndex = new Random().Next(0, oldCollectionSize - 1);
+
+            CD cd = new CD() {
+                id = 1234,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
+
+            CDState cdState = new CDState() {
+                cd = cd,
+                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
+            };
+
+            Customer customer = new Customer() {
+                name = "Kamil",
+                surname = "Filipczak",
+                emailAddress = "kf@gmail.com",
+                age = 51
+            };
+
+            Event evt = new Event() {
+                cdState = cdState,
+                customer = customer
+            };
+
+            dataRepository.UpdateEvent(randomIndex, evt);
+            int newCollectionSize = data.events.Count;
+
+            //check if number of events is not changed
+            Assert.AreEqual(oldCollectionSize, newCollectionSize);
+
+            //check if properties are the same
+            Assert.AreEqual(evt.cdState, data.events[randomIndex].cdState);
+            Assert.AreEqual(evt.customer, data.events[randomIndex].customer);
+        }
+
+        [TestMethod]
+        public void UpdateEventNegativeTest() {
+
+            //clear collection
+            data.events.Clear();
+
+            CD cd = new CD() {
+                id = 1234,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
+
+            CDState cdState = new CDState() {
+                cd = cd,
+                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
+            };
+
+            Customer customer = new Customer() {
+                name = "Kamil",
+                surname = "Filipczak",
+                emailAddress = "kf@gmail.com",
+                age = 51
+            };
+
+            Event evt = new Event() {
+                cdState = cdState,
+                customer = customer
+            };
+
+            //try to update empty collection
+            dataRepository.UpdateEvent(0, evt);
+
+            //check if collection is still empty
+            Assert.AreEqual(0, data.events.Count);
+        }
+
+        [TestMethod]
+        public void UpdateCDStatePositiveTest() {
+
+            int oldListSize = data.cdStates.Count;
+            int randomIndex = new Random().Next(0, oldListSize - 1);
+
+            CD cd = new CD() {
+                id = 1234,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
+
+            CDState cdState = new CDState() {
+                cd = cd,
+                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
+            };
+
+            dataRepository.UpdateCDState(randomIndex, cdState);
+            int newListSize = data.cdStates.Count;
+
+            //check if size of new and old list is the same
+            Assert.AreEqual(oldListSize, newListSize);
+
+            //compare properties
+            Assert.AreEqual(cdState.cd, data.cdStates[randomIndex].cd);
+            Assert.AreEqual(cdState.dateOfPurchase, data.cdStates[randomIndex].dateOfPurchase);
+        }
+
+        [TestMethod]
+        public void UpdateCDStateNegativeTest() {
+
+            //clear list
+            data.cdStates.Clear();
+
+            CD cd = new CD() {
+                id = 1234,
+                title = "Nevermind",
+                group = "Nirvana"
+            };
+
+            CDState cdState = new CDState() {
+                cd = cd,
+                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
+            };
+
+            //try to update empty list
+            dataRepository.UpdateCDState(0, cdState);
+
+            //check if size of new and old list is the same
+            Assert.AreEqual(0, data.cdStates.Count);
         }
     }
 }
