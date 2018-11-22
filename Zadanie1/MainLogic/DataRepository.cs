@@ -136,23 +136,23 @@ namespace Zadanie1.MainLogic
             }
         }
 
-        public void DeleteCD(int id, CD newCD)
+        public void DeleteCD(int key)
         {
-            if (data.cds.ContainsKey(id))
+            if (data.cds.ContainsKey(key))
             {
-                data.cds.Remove(id);
+                data.cds.Remove(key);
             }
         }
 
-        public void DeleteEvent(int index, Event newEvent)
+        public void DeleteEvent(int index)
         {
             if (data.events.Count > index)
             {
-                data.customers.RemoveAt(index);
+                data.events.RemoveAt(index);
             }
         }
 
-        public void DeleteCDState(int index, CDState newCDState)
+        public void DeleteCDState(int index)
         {
             if (data.cdStates.Count > index)
             {

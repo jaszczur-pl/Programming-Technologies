@@ -450,5 +450,125 @@ namespace UnitTests
             //check if size of new and old list is the same
             Assert.AreEqual(0, data.cdStates.Count);
         }
+
+        [TestMethod]
+        public void DeleteCustomerPositiveTest() {
+
+            int oldCollectionSize = data.customers.Count;
+            int randomIndex = new Random().Next(0, oldCollectionSize - 1);
+
+            Customer removedCustomer = data.customers[randomIndex];
+
+            dataRepository.DeleteCustomer(randomIndex);
+
+            //check if list size is decreased
+            Assert.AreNotEqual(oldCollectionSize, data.customers.Count);
+
+            //check if object is removed from collection
+            Assert.IsFalse(data.customers.Contains(removedCustomer));
+        }
+
+        [TestMethod]
+        public void DeleteCustomerNegativeTest() {
+
+            int oldCollectionSize = data.customers.Count;
+
+            //try to delete customer (index is out of range)
+            dataRepository.DeleteCustomer(oldCollectionSize);
+
+            //check if list size is not changed
+            Assert.AreEqual(oldCollectionSize, data.customers.Count);
+        }
+
+        [TestMethod]
+        public void DeleteCDPositiveTest() {
+
+            int oldCollectionSize = data.cds.Count;
+            int constKey = 1526;
+
+            CD removedCD = data.cds[constKey];
+
+            dataRepository.DeleteCD(constKey);
+
+            //check if list size is decreased
+            Assert.AreNotEqual(oldCollectionSize, data.cds.Count);
+
+            //check if object is removed from collection
+            Assert.IsFalse(data.cds.ContainsValue(removedCD));
+            Assert.IsFalse(data.cds.ContainsKey(removedCD.id));
+        }
+
+        [TestMethod]
+        public void DeleteCDNegativeTest() {
+
+            int oldCollectionSize = data.cds.Count;
+            int constKey = -1;
+
+            //try to delete object with incorrect key
+            dataRepository.DeleteCD(constKey);
+
+            //check if list size is decreased
+            Assert.AreEqual(oldCollectionSize, data.cds.Count);
+        }
+
+        [TestMethod]
+        public void DeleteEventPositiveTest() {
+
+            int oldCollectionSize = data.events.Count;
+            int randomIndex = new Random().Next(0, oldCollectionSize - 1);
+
+            Event removedEvent = data.events[randomIndex];
+
+            dataRepository.DeleteEvent(randomIndex);
+
+            //check if list size is decreased
+            Assert.AreNotEqual(oldCollectionSize, data.events.Count);
+
+            //check if object is removed from collection
+            Assert.IsFalse(data.events.Contains(removedEvent));
+        }
+
+        [TestMethod]
+        public void DeleteEventNegativeTest() {
+
+            int oldCollectionSize = data.events.Count;
+
+            //try to delete customer (index is out of range)
+            dataRepository.DeleteEvent(oldCollectionSize);
+
+            //check if list size is not changed
+            Assert.AreEqual(oldCollectionSize, data.events.Count);
+        }
+
+        [TestMethod]
+        public void DeleteCDStatePositiveTest() {
+
+            int oldCollectionSize = data.cdStates.Count;
+            int randomIndex = new Random().Next(0, oldCollectionSize - 1);
+
+            CDState removedCDState = data.cdStates[randomIndex];
+
+            dataRepository.DeleteCDState(randomIndex);
+
+            //check if list size is decreased
+            Assert.AreNotEqual(oldCollectionSize, data.cdStates.Count);
+
+            //check if object is removed from collection
+            Assert.IsFalse(data.cdStates.Contains(removedCDState));
+        }
+
+        [TestMethod]
+        public void DeleteCDStateNegativeTest() {
+
+            int oldCollectionSize = data.cdStates.Count;
+
+            //try to delete customer (index is out of range)
+            dataRepository.DeleteCDState(oldCollectionSize);
+
+            //check if list size is not changed
+            Assert.AreEqual(oldCollectionSize, data.cdStates.Count);
+        }
+
+
     }
 }
