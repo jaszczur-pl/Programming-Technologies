@@ -17,20 +17,20 @@ namespace Zadanie1.MainLogic
 
 
             Customer c1 = new Customer() {
-                name = "Kowalski",
-                surname = "Jan",
+                surname = "Kowalski",
+                name = "Jan",
                 emailAddress = "kowaskij@gmail.com",
                 age = 30
             };
             Customer c2 = new Customer() {
-                name = "Nowak",
-                surname = "Katarzyna",
+                surname = "Nowak",
+                name = "Katarzyna",
                 emailAddress = "nowakk@o2.pl",
                 age = 35
             };
             Customer c3 = new Customer() {
-                name = "Miłoch",
-                surname = "Krzysztof",
+                surname = "Miłoch",
+                name = "Krzysztof",
                 emailAddress = "milochk@onet.pl",
                 age = 24
             };
