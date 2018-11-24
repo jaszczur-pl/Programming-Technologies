@@ -55,7 +55,7 @@ namespace Zadanie1.MainLogic
 
             CDState cdState1 = new CDState() {
                 cd = cd1,
-                dateOfPurchase = new DateTimeOffset(new DateTime(2016, 06, 14))
+                dateOfPurchase = new DateTimeOffset(new DateTime(2012, 06, 14))
             };
             CDState cdState2 = new CDState() {
                 cd = cd2,

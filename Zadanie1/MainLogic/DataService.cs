@@ -92,5 +92,49 @@ namespace Zadanie1.MainLogic
 
             return data;
         }
+
+        public List<Event> getEventByDate(DateTimeOffset startDate, DateTimeOffset endDate) {
+
+            return repository.GetAllEvents().Where(e => e.cdState.dateOfPurchase >= startDate && e.cdState.dateOfPurchase <= endDate).ToList();
+
+        }
+
+        public void AddEvent(Customer customer, CDState cdState) {
+
+            IEnumerable<Customer> currentCustomers = repository.GetAllCustomers();
+            bool currentEvents = repository.GetAllEvents().Any(e => e.cdState.Equals(cdState));
+
+            if (currentCustomers.Contains(customer) && !currentEvents) {
+                Event evt = new Event() { customer = customer, cdState = cdState };
+                repository.AddEvent(evt);
+            }
+        }
+
+        public void AddCustomer(Customer customer) {
+
+            IEnumerable<Customer> currentCustomers = repository.GetAllCustomers();
+
+            if (!currentCustomers.Contains(customer)) {
+                repository.AddCustomer(customer);
+            }
+        }
+
+        public void AddCD(CD cd) {
+
+            IEnumerable<CD> currentCDs = repository.GetAllCDs();
+
+            if (!currentCDs.Contains(cd)) {
+                repository.AddCD(cd);
+            }
+        }
+
+        public void AddCDState(CD cd) {
+            IEnumerable<CD> currentCDs = repository.GetAllCDs();
+            DateTimeOffset curentDate = DateTimeOffset.Now;
+
+            if (currentCDs.Contains(cd)) {
+                repository.AddCDState(new CDState() { cd = cd, dateOfPurchase = curentDate});
+            }
+        }
     }
 }
