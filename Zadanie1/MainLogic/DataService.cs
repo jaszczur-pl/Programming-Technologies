@@ -136,5 +136,69 @@ namespace Zadanie1.MainLogic
                 repository.AddCDState(new CDState() { cd = cd, dateOfPurchase = curentDate});
             }
         }
+
+        public void UpdateCustomer(int index, Customer customer) {
+            int numberOfElements = repository.GetAllCustomers().Count();
+
+            if (numberOfElements > index) {
+                repository.UpdateCustomer(index, customer);
+            }  
+        }
+
+        public void UpdateCD(int id, CD cd) {
+            bool isCDExist = repository.GetAllCDs().Where(x => x.id == id).Any();
+
+            if (isCDExist) {
+                repository.UpdateCD(id, cd);
+            }
+        }
+
+        public void UpdateEvent(int index, Event evt) {
+            int numberOfElements = repository.GetAllEvents().Count();
+
+            if (numberOfElements > index) {
+                repository.UpdateEvent(index, evt);
+            }
+        }
+
+        public void UpdateCDState(int index, CDState cdState) {
+            int numberOfElements = repository.GetAllCDStates().Count();
+
+            if (numberOfElements > index) {
+                repository.UpdateCDState(index, cdState);
+            }
+        }
+
+        public void DeleteCustomer(int index) {
+            int numberOfElements = repository.GetAllCustomers().Count();
+
+            if (numberOfElements > index) {
+                repository.DeleteCustomer(index);
+            }
+        }
+
+        public void DeleteCD(int id) {
+            bool isCDExist = repository.GetAllCDs().Where(x => x.id == id).Any();
+
+            if (isCDExist) {
+                repository.DeleteCD(id);
+            }
+        }
+
+        public void DeleteEvent(int index) {
+            int numberOfElements = repository.GetAllEvents().Count();
+
+            if (numberOfElements > index) {
+                repository.DeleteEvent(index);
+            }
+        }
+
+        public void DeleteCDState(int index) {
+            int numberOfElements = repository.GetAllCDStates().Count();
+
+            if (numberOfElements > index) {
+                repository.DeleteCDState(index);
+            }
+        } 
     }
 }

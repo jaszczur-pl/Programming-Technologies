@@ -24,9 +24,7 @@ namespace Zadanie1.MainLogic
         }
 
         public void AddCD(CD cd) {
-            if (!data.cds.ContainsKey(cd.id)) {
                 data.cds.Add(cd.id, cd);
-            }
         }
 
         public void AddEvent(Event evt) {
@@ -93,71 +91,47 @@ namespace Zadanie1.MainLogic
 
         //Update object in collection for the received position
         public void UpdateCustomer(int index, Customer newCustomer) {
-            if (data.customers.Count > index) {
                 Customer customer = data.customers[index];
 
                 customer.age = newCustomer.age;
                 customer.emailAddress = newCustomer.emailAddress;
                 customer.name = newCustomer.name;
-                customer.surname = newCustomer.surname;
-            }
         }
 
         public void UpdateCD(int id, CD newCD) {
-            if (data.cds.ContainsKey(id)) {
                 data.cds[id].group = newCD.group;
                 data.cds[id].title = newCD.title;
-            }
         }
 
         public void UpdateEvent(int index, Event newEvent){
-            if (data.events.Count > index) {
                 Event evt = data.events[index];
 
                 evt.cdState = newEvent.cdState;
                 evt.customer = newEvent.customer;
-            }
         }
 
         public void UpdateCDState(int index, CDState newCDState) {
-            if (data.cdStates.Count > index) {
                 CDState cdState = data.cdStates[index];
 
                 cdState.cd = newCDState.cd;
                 cdState.dateOfPurchase = newCDState.dateOfPurchase;
-            }
         }
 
         //Remove object from collection for the received position
         public void DeleteCustomer(int index) {
-            if (data.customers.Count > index)
-            {
                 data.customers.RemoveAt(index);
-            }
         }
 
-        public void DeleteCD(int key)
-        {
-            if (data.cds.ContainsKey(key))
-            {
+        public void DeleteCD(int key) { 
                 data.cds.Remove(key);
-            }
         }
 
-        public void DeleteEvent(int index)
-        {
-            if (data.events.Count > index)
-            {
+        public void DeleteEvent(int index) {
                 data.events.RemoveAt(index);
-            }
         }
 
-        public void DeleteCDState(int index)
-        {
-            if (data.cdStates.Count > index)
-            {
+        public void DeleteCDState(int index) {
                 data.cdStates.RemoveAt(index);
-            }
         }
 
     }
