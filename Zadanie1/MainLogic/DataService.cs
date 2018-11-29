@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Zadanie1.MainLogic
 {
-    class DataService
+    public class DataService
     {
         private DataRepository repository;
 
@@ -69,29 +69,6 @@ namespace Zadanie1.MainLogic
             return data;
         }
 
-        public string getCustomersBySurname(string surname) {
-            Customer[] customers = repository.GetAllCustomers().Where(c => c.surname == surname).ToArray();
-
-            string data = "";
-
-            foreach (Customer cust in customers) {
-                data += cust.name + " " + cust.surname + "\n"; 
-            }
-
-            return data;
-        }
-
-        public string getCDByID(int id) {
-            CD[] cds = repository.GetAllCDs().Where(c => c.id == id).ToArray();
-
-            string data = "";
-
-            foreach (CD cd in cds) {
-                data += cd.id + " " + cd.group + " - " + cd.title + "\n";
-            }
-
-            return data;
-        }
 
         public List<Event> getEventByDate(DateTimeOffset startDate, DateTimeOffset endDate) {
 
@@ -199,6 +176,32 @@ namespace Zadanie1.MainLogic
             if (numberOfElements > index) {
                 repository.DeleteCDState(index);
             }
-        } 
+        }
+
+        public string getCustomersBySurname(string surname) {
+            Customer[] customers = repository.GetAllCustomers().Where(c => c.surname == surname).ToArray();
+
+            string data = "";
+
+            foreach (Customer cust in customers) {
+                data += cust.name + " " + cust.surname + "\n";
+            }
+
+            return data;
+        }
+
+        public string getCDByID(int id) {
+            CD[] cds = repository.GetAllCDs().Where(c => c.id == id).ToArray();
+
+            string data = "";
+
+            foreach (CD cd in cds) {
+                data += cd.id + " " + cd.group + " - " + cd.title + "\n";
+            }
+
+            return data;
+        }
+
+
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Zadanie1.MainLogic
 {
-    class FillingFromFile: DataFiller
+    public class FillingFromFile: DataFiller
     {
         public override void Fill(DataContext context) {
 
