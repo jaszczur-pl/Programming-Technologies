@@ -71,24 +71,19 @@ namespace Zadanie1.MainLogic
 
 
         public List<Event> getEventByDate(DateTimeOffset startDate, DateTimeOffset endDate) {
-
             return repository.GetAllEvents().Where(e => e.cdState.dateOfPurchase >= startDate && e.cdState.dateOfPurchase <= endDate).ToList();
-
         }
 
         public void AddEvent(Customer customer, CDState cdState) {
+            bool isEventExist = repository.GetAllEvents().Any(e => e.cdState.Equals(cdState) && e.customer.Equals(customer));
 
-            IEnumerable<Customer> currentCustomers = repository.GetAllCustomers();
-            bool currentEvents = repository.GetAllEvents().Any(e => e.cdState.Equals(cdState));
-
-            if (currentCustomers.Contains(customer) && !currentEvents) {
+            if (!isEventExist) {
                 Event evt = new Event() { customer = customer, cdState = cdState };
                 repository.AddEvent(evt);
             }
         }
 
         public void AddCustomer(Customer customer) {
-
             IEnumerable<Customer> currentCustomers = repository.GetAllCustomers();
 
             if (!currentCustomers.Contains(customer)) {
@@ -97,19 +92,18 @@ namespace Zadanie1.MainLogic
         }
 
         public void AddCD(CD cd) {
+            bool isCDExist = repository.GetAllCDs().Where(x => x.id == cd.id).Any();
 
-            IEnumerable<CD> currentCDs = repository.GetAllCDs();
-
-            if (!currentCDs.Contains(cd)) {
+            if (!isCDExist) {
                 repository.AddCD(cd);
             }
         }
 
         public void AddCDState(CD cd) {
-            IEnumerable<CD> currentCDs = repository.GetAllCDs();
+            bool isCDExist = repository.GetAllCDs().Where(x => x.id == cd.id).Any();
             DateTimeOffset curentDate = DateTimeOffset.Now;
 
-            if (currentCDs.Contains(cd)) {
+            if (isCDExist) {
                 repository.AddCDState(new CDState() { cd = cd, dateOfPurchase = curentDate});
             }
         }

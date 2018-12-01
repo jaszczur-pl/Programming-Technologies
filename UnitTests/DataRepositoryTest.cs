@@ -45,7 +45,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void AddCDPositiveTest() {
+        public void AddCDTest() {
             int oldDictSize = data.cds.Count;
 
             CD cd = new CD() {
@@ -63,27 +63,6 @@ namespace UnitTests
             //check if dictionary contains object
             Assert.IsTrue(data.cds.ContainsKey(1234));
             Assert.IsTrue(data.cds.ContainsValue(cd));
-        }
-
-        [TestMethod]
-        public void AddCDNegativeTest() {
-            int oldDictSize = data.cds.Count;
-
-            CD cd = new CD() {
-                id = 1526,
-                title = "Nevermind",
-                group = "Nirvana"
-            };
-
-            dataRepository.AddCD(cd);
-            int newDictSize = data.cds.Count;
-
-            //check if size of new and old dictionary is the same
-            Assert.AreEqual(oldDictSize, newDictSize);
-
-            //check if dictionary data is not changed
-            Assert.AreNotEqual(data.cds[1526].group, cd.group);
-            Assert.AreNotEqual(data.cds[1526].title, cd.title);
         }
 
         [TestMethod]
@@ -236,7 +215,7 @@ namespace UnitTests
         //'Update' methods tests
 
         [TestMethod]
-        public void UpdateCustomerPositiveTest() {
+        public void UpdateCustomerTest() {
 
             Customer updatedCustomer = new Customer() {
                 name = "Kamil",
@@ -261,29 +240,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void UpdateCustomerNegativeTest() {
-
-            //clear customers list
-            data.customers.Clear();
-
-            Customer updatedCustomer = new Customer() {
-                name = "Kamil",
-                surname = "Filipczak",
-                emailAddress = "kf@gmail.com",
-                age = 51
-            };
-
-            int index = 0;
-
-            //try to update empty list (index is out of range)
-            dataRepository.UpdateCustomer(index, updatedCustomer);
-
-            //check if list is still empty
-            Assert.AreEqual(0, data.customers.Count);
-        }
-
-        [TestMethod]
-        public void UpdateCDPositiveTest() {
+        public void UpdateCDTest() {
 
             CD cd = new CD() {
                 id = 1526,
@@ -305,26 +262,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void UpdateCDNegativeTest() {
-
-            //clear dictionary
-            data.cds.Clear();
-
-            CD cd = new CD() {
-                id = 1526,
-                title = "Nevermind",
-                group = "Nirvana"
-            };
-
-            //try to update empty dictionary
-            dataRepository.UpdateCD(cd.id, cd);
-
-            //check if dictionary is still empty
-            Assert.AreEqual(0, data.cds.Count);
-        }
-
-        [TestMethod]
-        public void UpdateEventPositiveTest() {
+        public void UpdateEventTest() {
 
             int oldCollectionSize = data.events.Count;
             int randomIndex = new Random().Next(0, oldCollectionSize - 1);
@@ -364,43 +302,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void UpdateEventNegativeTest() {
-
-            //clear collection
-            data.events.Clear();
-
-            CD cd = new CD() {
-                id = 1234,
-                title = "Nevermind",
-                group = "Nirvana"
-            };
-
-            CDState cdState = new CDState() {
-                cd = cd,
-                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
-            };
-
-            Customer customer = new Customer() {
-                name = "Kamil",
-                surname = "Filipczak",
-                emailAddress = "kf@gmail.com",
-                age = 51
-            };
-
-            Event evt = new Event() {
-                cdState = cdState,
-                customer = customer
-            };
-
-            //try to update empty collection
-            dataRepository.UpdateEvent(0, evt);
-
-            //check if collection is still empty
-            Assert.AreEqual(0, data.events.Count);
-        }
-
-        [TestMethod]
-        public void UpdateCDStatePositiveTest() {
+        public void UpdateCDStateTest() {
 
             int oldListSize = data.cdStates.Count;
             int randomIndex = new Random().Next(0, oldListSize - 1);
@@ -427,32 +329,9 @@ namespace UnitTests
             Assert.AreEqual(cdState.dateOfPurchase, data.cdStates[randomIndex].dateOfPurchase);
         }
 
-        [TestMethod]
-        public void UpdateCDStateNegativeTest() {
-
-            //clear list
-            data.cdStates.Clear();
-
-            CD cd = new CD() {
-                id = 1234,
-                title = "Nevermind",
-                group = "Nirvana"
-            };
-
-            CDState cdState = new CDState() {
-                cd = cd,
-                dateOfPurchase = new DateTimeOffset(new DateTime(2013, 11, 03))
-            };
-
-            //try to update empty list
-            dataRepository.UpdateCDState(0, cdState);
-
-            //check if size of new and old list is the same
-            Assert.AreEqual(0, data.cdStates.Count);
-        }
 
         [TestMethod]
-        public void DeleteCustomerPositiveTest() {
+        public void DeleteCustomerTest() {
 
             int oldCollectionSize = data.customers.Count;
             int randomIndex = new Random().Next(0, oldCollectionSize - 1);
@@ -469,19 +348,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void DeleteCustomerNegativeTest() {
-
-            int oldCollectionSize = data.customers.Count;
-
-            //try to delete customer (index is out of range)
-            dataRepository.DeleteCustomer(oldCollectionSize);
-
-            //check if list size is not changed
-            Assert.AreEqual(oldCollectionSize, data.customers.Count);
-        }
-
-        [TestMethod]
-        public void DeleteCDPositiveTest() {
+        public void DeleteCDTest() {
 
             int oldCollectionSize = data.cds.Count;
             int constKey = 1526;
@@ -499,20 +366,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void DeleteCDNegativeTest() {
-
-            int oldCollectionSize = data.cds.Count;
-            int constKey = -1;
-
-            //try to delete object with incorrect key
-            dataRepository.DeleteCD(constKey);
-
-            //check if list size is decreased
-            Assert.AreEqual(oldCollectionSize, data.cds.Count);
-        }
-
-        [TestMethod]
-        public void DeleteEventPositiveTest() {
+        public void DeleteEventTest() {
 
             int oldCollectionSize = data.events.Count;
             int randomIndex = new Random().Next(0, oldCollectionSize - 1);
@@ -529,19 +383,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void DeleteEventNegativeTest() {
-
-            int oldCollectionSize = data.events.Count;
-
-            //try to delete customer (index is out of range)
-            dataRepository.DeleteEvent(oldCollectionSize);
-
-            //check if list size is not changed
-            Assert.AreEqual(oldCollectionSize, data.events.Count);
-        }
-
-        [TestMethod]
-        public void DeleteCDStatePositiveTest() {
+        public void DeleteCDStateTest() {
 
             int oldCollectionSize = data.cdStates.Count;
             int randomIndex = new Random().Next(0, oldCollectionSize - 1);
@@ -555,18 +397,6 @@ namespace UnitTests
 
             //check if object is removed from collection
             Assert.IsFalse(data.cdStates.Contains(removedCDState));
-        }
-
-        [TestMethod]
-        public void DeleteCDStateNegativeTest() {
-
-            int oldCollectionSize = data.cdStates.Count;
-
-            //try to delete customer (index is out of range)
-            dataRepository.DeleteCDState(oldCollectionSize);
-
-            //check if list size is not changed
-            Assert.AreEqual(oldCollectionSize, data.cdStates.Count);
         }
 
 

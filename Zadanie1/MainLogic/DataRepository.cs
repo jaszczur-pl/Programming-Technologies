@@ -24,7 +24,7 @@ namespace Zadanie1.MainLogic
         }
 
         public void AddCD(CD cd) {
-                data.cds.Add(cd.id, cd);
+            data.cds.Add(cd.id, cd);
         }
 
         public void AddEvent(Event evt) {
@@ -91,47 +91,48 @@ namespace Zadanie1.MainLogic
 
         //Update object in collection for the received position
         public void UpdateCustomer(int index, Customer newCustomer) {
-                Customer customer = data.customers[index];
+            Customer customer = data.customers[index];
 
-                customer.age = newCustomer.age;
-                customer.emailAddress = newCustomer.emailAddress;
-                customer.name = newCustomer.name;
+            customer.age = newCustomer.age;
+            customer.emailAddress = newCustomer.emailAddress;
+            customer.name = newCustomer.name;
+            customer.surname = newCustomer.surname;
         }
 
         public void UpdateCD(int id, CD newCD) {
-                data.cds[id].group = newCD.group;
-                data.cds[id].title = newCD.title;
+            data.cds[id].group = newCD.group;
+            data.cds[id].title = newCD.title;
         }
 
         public void UpdateEvent(int index, Event newEvent){
-                Event evt = data.events[index];
+            Event evt = data.events[index];
 
-                evt.cdState = newEvent.cdState;
-                evt.customer = newEvent.customer;
+            evt.cdState = newEvent.cdState;
+            evt.customer = newEvent.customer;
         }
 
         public void UpdateCDState(int index, CDState newCDState) {
-                CDState cdState = data.cdStates[index];
+            CDState cdState = data.cdStates[index];
 
-                cdState.cd = newCDState.cd;
-                cdState.dateOfPurchase = newCDState.dateOfPurchase;
+            cdState.cd = newCDState.cd;
+            cdState.dateOfPurchase = newCDState.dateOfPurchase;
         }
 
         //Remove object from collection for the received position
         public void DeleteCustomer(int index) {
-                data.customers.RemoveAt(index);
+            data.customers.RemoveAt(index);
         }
 
         public void DeleteCD(int key) { 
-                data.cds.Remove(key);
+            data.cds.Remove(key);
         }
 
         public void DeleteEvent(int index) {
-                data.events.RemoveAt(index);
+            data.events.RemoveAt(index);
         }
 
         public void DeleteCDState(int index) {
-                data.cdStates.RemoveAt(index);
+            data.cdStates.RemoveAt(index);
         }
 
     }
