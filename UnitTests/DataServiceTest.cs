@@ -114,7 +114,7 @@ namespace UnitTests
             Assert.AreNotEqual(oldListSize, newListSize);
 
             //check if collection contains added event
-            Assert.IsTrue(data.events.Any( x => x.customer.Equals(customer) && x.cdState.Equals(cdState)));
+            Assert.IsTrue(data.events.Any(x => x.customer.Equals(customer) && x.cdState.Equals(cdState)));
         }
 
         [TestMethod]
@@ -460,5 +460,93 @@ namespace UnitTests
             //check if list size is not changed
             Assert.AreEqual(oldCollectionSize, data.cdStates.Count);
         }
+
+        [TestMethod]
+        public void GetEventByDatePositiveTest() {
+            DateTimeOffset startDate = new DateTimeOffset(new DateTime(1900, 01, 01));
+            DateTimeOffset currentDate = DateTimeOffset.Now;
+
+            List<Event> eventList = service.GetEventByDate(startDate, currentDate);
+            int numberOfEvents = eventList.Count();
+
+            //check if number of returned events is greater than 0
+            Assert.IsTrue(numberOfEvents > 0);
+
+            //check if dates are correct
+            foreach (Event evt in eventList) {
+                Assert.IsTrue(evt.cdState.dateOfPurchase > startDate && evt.cdState.dateOfPurchase < currentDate);
+            }
+        }
+
+        [TestMethod]
+        public void GetEventByDateNegativeTest() {
+            DateTimeOffset currentDate = new DateTimeOffset(new DateTime(9999, 01, 01));
+            DateTimeOffset startDate = DateTimeOffset.Now;
+
+            List<Event> eventList = service.GetEventByDate(startDate, currentDate);
+            int numberOfEvents = eventList.Count();
+
+            //check if number of returned events is greater than 0
+            Assert.IsTrue(numberOfEvents == 0);
+        }
+
+        [TestMethod]
+        public void GetCustomersBySurnamePositiveTest() {
+
+            string surname = "Kowalski";
+            int numberOfCustomersOnList = dataRepository.GetAllCustomers().Where(c => c.surname == surname).Count();
+
+            List<Customer> customersList = service.GetCustomersBySurname(surname);
+            int returnedCustomers = customersList.Count();
+
+            //check if number of returned customers is correct
+            Assert.IsTrue(returnedCustomers <= numberOfCustomersOnList && returnedCustomers > 0);
+
+            //check if all customers have proper surname
+            foreach (Customer customer in customersList) {
+                Assert.IsTrue(customer.surname == surname);
+            }
+        }
+
+        [TestMethod]
+        public void GetCustomersBySurnameNegativeTest() {
+
+            string surname = "Smith";
+            int numberOfCustomersOnList = dataRepository.GetAllCustomers().Where(c => c.surname == surname).Count();
+
+            List<Customer> customersList = service.GetCustomersBySurname(surname);
+            int returnedCustomers = customersList.Count();
+
+            //check if number of returned customers
+            Assert.IsTrue(returnedCustomers == 0);
+        }
+
+        [TestMethod]
+        public void GetCDByIDPositiveTest() {
+
+            int id = 1333;
+
+            Dictionary<int, CD> cdsDictionary = service.GetCDByID(id);
+            int numberOfReturnedCDs = cdsDictionary.Count();
+
+            //check if number of returned cds is correct
+            Assert.AreEqual(1, numberOfReturnedCDs);
+
+            // check if cd id is proper
+            Assert.IsTrue(cdsDictionary.ContainsKey(id));
+        }
+
+        [TestMethod]
+        public void GetCDByIDNegativeTest() {
+
+            int id = 0001;
+
+            Dictionary<int, CD> cdsDictionary = service.GetCDByID(id);
+            int numberOfReturnedCDs = cdsDictionary.Count();
+
+            //check if number of returned cds is correct
+            Assert.AreEqual(0, numberOfReturnedCDs);
+        }
+
     }
 }

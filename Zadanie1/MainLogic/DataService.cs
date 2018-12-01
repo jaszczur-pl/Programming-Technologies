@@ -69,11 +69,6 @@ namespace Zadanie1.MainLogic
             return data;
         }
 
-
-        public List<Event> getEventByDate(DateTimeOffset startDate, DateTimeOffset endDate) {
-            return repository.GetAllEvents().Where(e => e.cdState.dateOfPurchase >= startDate && e.cdState.dateOfPurchase <= endDate).ToList();
-        }
-
         public void AddEvent(Customer customer, CDState cdState) {
             bool isEventExist = repository.GetAllEvents().Any(e => e.cdState.Equals(cdState) && e.customer.Equals(customer));
 
@@ -101,10 +96,10 @@ namespace Zadanie1.MainLogic
 
         public void AddCDState(CD cd) {
             bool isCDExist = repository.GetAllCDs().Where(x => x.id == cd.id).Any();
-            DateTimeOffset curentDate = DateTimeOffset.Now;
+            DateTimeOffset currentDate = DateTimeOffset.Now;
 
             if (isCDExist) {
-                repository.AddCDState(new CDState() { cd = cd, dateOfPurchase = curentDate});
+                repository.AddCDState(new CDState() { cd = cd, dateOfPurchase = currentDate});
             }
         }
 
@@ -172,28 +167,16 @@ namespace Zadanie1.MainLogic
             }
         }
 
-        public string getCustomersBySurname(string surname) {
-            Customer[] customers = repository.GetAllCustomers().Where(c => c.surname == surname).ToArray();
-
-            string data = "";
-
-            foreach (Customer cust in customers) {
-                data += cust.name + " " + cust.surname + "\n";
-            }
-
-            return data;
+        public List<Event> GetEventByDate(DateTimeOffset startDate, DateTimeOffset endDate) {
+            return repository.GetAllEvents().Where(e => e.cdState.dateOfPurchase >= startDate && e.cdState.dateOfPurchase <= endDate).ToList();
         }
 
-        public string getCDByID(int id) {
-            CD[] cds = repository.GetAllCDs().Where(c => c.id == id).ToArray();
+        public List<Customer> GetCustomersBySurname(string surname) {
+            return repository.GetAllCustomers().Where(c => c.surname == surname).ToList();
+        }
 
-            string data = "";
-
-            foreach (CD cd in cds) {
-                data += cd.id + " " + cd.group + " - " + cd.title + "\n";
-            }
-
-            return data;
+        public Dictionary<int, CD> GetCDByID(int id) {
+            return repository.GetAllCDs().Where(d => d.id == id).ToDictionary(d => d.id);
         }
 
 
