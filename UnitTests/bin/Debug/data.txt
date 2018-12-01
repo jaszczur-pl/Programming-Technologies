@@ -1,0 +1,3 @@
+﻿Jan;Kowalski;jk@o2.pl;33;5463;Nevermind;Nirvana;2013;08;13
+Katarzyna;Nowak;nowakk@o2.pl;35;1526;Let it be;The Beatles;2017;01;15
+Krzysztof;Miłoch;milochk@onet.pl;24;1333;Bad;Michael Jackson;2018;03;15
